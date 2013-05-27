@@ -1,0 +1,32 @@
+<php>
+	foreach($category as $row){
+</php>
+<php>
+	switch($Display){
+	case "nav":
+</php>
+<a target="_top" href="/Category/{$row.name}">{$row.name}</a> &gt;
+<php>
+	break;
+	case "tree":
+</php>
+<!--一级分类开始 -->
+<li class="">
+	<a target="_top" href="/Category/{$row.name}">{$row.name}</a>
+	<!--二级分类开始 -->
+	<div class="">
+		<ul>
+			<li class="">
+				<a target="_top" href="#"></a>
+			</li>
+		</ul>
+	</div>
+	<!--二级分类结束 -->
+</li>
+<!--一级分类结束 -->
+
+<php>
+	}
+	}
+</php>
+
