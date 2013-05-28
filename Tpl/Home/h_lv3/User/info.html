@@ -12,7 +12,7 @@
 					<a target="_top" href="__APP__/Cart/cart">My ShoppingCart</a>
 				</li>
 				<li>
-					<a target="_top" href="__URL__/order">My Order</a>
+					<a target="_top" href="__URL__/myorder">My Order</a>
 				</li>
 				<li>
 					<a target="_top" href="__URL__/info"> My Informartion</a>
@@ -29,14 +29,14 @@
 		<!-----------------------------------用户信息更新Widget开始--------------------------------------------------->
 
 		<script type="text/javascript">
-			$(document).ready(function() {
-				print_country("sys_country");
-				$("#sys_country").val("");
-				var index = $("#sys_country ").get(0).selectedIndex;
-				print_state('sys_state', index);
-				$("#sys_state").val("");
+            $(document).ready(function() {
+                print_country("sys_country");
+                $("#sys_country").val("");
+                var index = $("#sys_country ").get(0).selectedIndex;
+                print_state('sys_state', index);
+                $("#sys_state").val("");
 
-			})
+            })
 
 		</script>
 		<div class="fixed_from user_right">

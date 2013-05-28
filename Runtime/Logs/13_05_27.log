@@ -6394,3 +6394,84 @@ INFO: [ view_end ] --START--
 INFO: Run ShowPageTrace Behavior [ RunTime:0.000998s ]
 INFO: [ view_end ] --END-- [ RunTime:0.001047s ]
 
+[ 2013-05-27T17:15:12+08:00 ] 127.0.0.1 /index.php/admin/Category/index
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001215s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001297s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000959s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001017s ]
+SQL: SHOW COLUMNS FROM `shop_category` [ RunTime:0.002444s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `shop_category` LIMIT 1   [ RunTime:0.000608s ]
+SQL: SELECT * FROM `shop_category`  [ RunTime:0.000173s ]
+NOTIC: [8] Undefined variable: res E:\www\MyTmall\Lib\Action\Admin\CategoryAction.class.php 第 12 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001737s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001834s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.012491s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013131s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000852s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000803s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000695s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.000879s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003378s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001297s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001366s ]
+
+[ 2013-05-27T17:41:22+08:00 ] 127.0.0.1 /index.php/admin/Category/index
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001258s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001361s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001047s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001121s ]
+SQL: SHOW COLUMNS FROM `shop_category` [ RunTime:0.002312s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `shop_category` LIMIT 1   [ RunTime:0.000618s ]
+SQL: SELECT * FROM `shop_category`  [ RunTime:0.000196s ]
+NOTIC: [8] Undefined variable: res E:\www\MyTmall\Lib\Action\Admin\CategoryAction.class.php 第 12 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001623s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001683s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.012590s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012664s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000860s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000792s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000715s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.000855s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003368s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.000987s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001037s ]
+
+[ 2013-05-27T17:43:41+08:00 ] 127.0.0.1 /index.php/admin/ProductType/index
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001659s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001773s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001138s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001234s ]
+SQL: SHOW COLUMNS FROM `shop_producttype` [ RunTime:0.002750s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `shop_producttype` LIMIT 1   [ RunTime:0.000480s ]
+SQL: SELECT * FROM `shop_producttype`  [ RunTime:0.000186s ]
+NOTIC: [8] Undefined variable: res E:\www\MyTmall\Lib\Action\Admin\ProductTypeAction.class.php 第 15 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001632s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001693s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.011707s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011773s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000848s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000802s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000699s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.000870s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003363s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001018s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001068s ]
+

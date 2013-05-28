@@ -63,26 +63,23 @@
 							EUR</label> -->
 						</div>
 						<script>
-							$(document).ready(function() {
-								$('#Gstr').autocomplete({
-									minLength : 0,
-									max : 10,
-									width : 10,
-									autoFill : true,
-									source : "/Public/productList",
-								});
+                            $(document).ready(function() {          
+                                $('#Gstr').autocomplete({
+                                    minLength : 0,
+                                    max : 10,
+                                    width : 10,
+                                    autoFill : true,
+                                    source : "/Public/productList",
 
-								$("#loading").ajaxStart(function() {
-									$(this).show();
-								})
-							})
+                                });
+                            })
 
 						</script>
 
 						<!--顶部搜索Widget开始-->
 						<form method="post" name="mini-search" target="_blank" action="/Public/serach">
 							<input id="go" value=" " alt="Search" src="__MYSTYLE__Images/go.jpg" type="image">
-							<input value="Oakley  Sunglasses" onblur="" onfocus="" name="key" id="Gstr" type="text">
+							<input value="" onblur="" onfocus="" name="key" id="Gstr" type="text">
 						</form>
 						<!--顶部搜索Widget开始-->
 					</div>

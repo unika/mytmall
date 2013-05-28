@@ -4,23 +4,51 @@
  */
 
 class CategoryAction extends Action {
-	public function index() {
-		$this -> display();
+	public function changeData() {
+		$model = new Model();
+		$list = $model -> query("select * from `shop_productimg` limit 1494 , 2000");
+		foreach ($list as $key => $value) {
+			$sql = "UPDATE `shop_productimg` SET `Img` = replace (`Img`," . $value['Id'] . ',' . $value['ProductId'] . ") WHERE `Img` LIKE '%" . $value['Id'] . "%' and Id=" . $value['Id'] . ";";
+			$model -> query($sql);
+
+		}
+
 	}
 
 	//执行前端的空操作,利于seo
 	public function _empty() {
 		import("ORG.Util.Page");
 		$name = ACTION_NAME;
-		$map['name'] = array('like', $name);
-		$category = D("Producttype");
+		$map['Name'] = array('like', $name);
+		$category = D("Category");
+		$aggregate = D("Productaggregate");
+		//获取分类id;
+		$cid = $category -> where($map) -> getField("Id");
+		$where['Pid'] = $cid;
+		//获取分类子类
+		$subcat = $category -> where($where) -> getField("Id,Name,Pid", TRUE);
+
+		//$subcat = arrayPidProcess($data, $res, $cid, 0);
+		foreach ($subcat as $key => $value) {
+			$plist[] = $value['Id'];
+		}
+		//获取分类下的全部子类产品id
+		$map['CategroyId'] = array('in', $plist);
+		$productlist = $aggregate -> where($map) -> getField("ProductId", TRUE);
+		//获取分类下的全部子类产品id
+		$condition['Id'] = array('in', $productlist);
 		$product = D("Product");
-		$list = $category -> where($map) -> getInfo();
-		$count = $result = $product -> where("ProductTypeId=" . $list['id']) -> count();
-		$page = New Page($count, 2);
-		$result = $product -> where("ProductTypeId=" . $list['id']) -> limit($page -> firstRow, $page -> listRows) -> getWidget();
+		$count = $product -> where($condition) -> count();
+		$page = New Page($count, 25);
+		$result = $product -> where($condition) -> limit($page -> firstRow, $page -> listRows) -> getProduct();
+		$page -> setConfig('header', '条记录');
+		$page -> setConfig('prev', '上一页');
+		$page -> setConfig('next', '下一页');
+		$page -> setConfig('first', '第一页');
+		$page -> setConfig('last', '最后一页');
+		$page -> setConfig('theme', ' %totalRow% %header% %nowPage%/%totalPage% 页 %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
 		$show = $page -> show();
-		$this -> assign($list);
+		$this -> assign("subcat", $subcat);
 		$this -> assign('result', $result);
 		$this -> assign('page', $show);
 		$this -> display("index");
@@ -36,9 +64,9 @@ class CategoryAction extends Action {
 		$image = M("Productimg");
 		foreach ($list as $key => $value) {
 			$img = $image -> field('Img') -> where('UseType=1 and ProductId=' . $value['id']) -> find();
-			$list[$key]['Img'] = $img;		
+			$list[$key]['Img'] = $img;
 		}
-	//	print_r($list);
+		//	print_r($list);
 		$count = count($list);
 		if ($list) {
 			$this -> ajaxReturn($list, '', 1);

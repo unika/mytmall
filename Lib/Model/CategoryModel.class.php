@@ -14,5 +14,19 @@ class CategoryModel extends Model {
 		return $typetree;
 	}
 
+	public function getListtree2($list) {
+		global $typetree;
+		foreach ($list as $key => $first) {
+			$typetree .= "<ul>";
+			$typetree .= "<li><a href='/Category/" . $first['info']['Name'] . "' class='edit' value='" . $first['info']['Id'] . "'>" . $first['info']['Name'];
+			if (is_array($first['child'])) {
+				$this -> getListtree($first['child']);
+			}
+			$typetree .= "</a></li>";
+			$typetree .= "</ul>";
+		}
+		return $typetree;
+	}
+
 }
 ?>

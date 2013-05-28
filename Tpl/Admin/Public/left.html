@@ -3,10 +3,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>菜单</title>
-		<script src="__PUBLIC__/js/prototype.lite.js" type="text/javascript"></script>
-		<script src="__PUBLIC__/js/moo.fx.js" type="text/javascript"></script>
-		<script src="__PUBLIC__/js/moo.fx.pack.js" type="text/javascript"></script>
-
+		<script src="__PUBLIC__/js/jquery.js" type="text/javascript"></script>
+		<script src="__PUBLIC__/js/jquery-ui.js" type="text/javascript"></script>
 		<style>
 			body {
 				font: 12px Arial, Helvetica, sans-serif;
@@ -14,10 +12,14 @@
 				background-color: #EEF2FB;
 				margin: 0px;
 			}
-			#container {
+			#accordion {
 				width: 182px;
 			}
-			h1 {
+			#accordion h3 {
+				background: url("__PUBLIC__/images/menu_topline.gif") no-repeat left bottom;
+				padding-bottom: 5px;
+			}
+			h3 {
 				font-size: 12px;
 				margin: 0px;
 				width: 182px;
@@ -25,7 +27,7 @@
 				height: 30px;
 				line-height: 20px;
 			}
-			h1 a {
+			h3 a {
 				display: block;
 				width: 182px;
 				color: #000;
@@ -39,17 +41,14 @@
 				margin: 0px;
 				padding: 0px;
 			}
-			.content {
-				width: 182px;
-				height: 26px;
-			}
-			.MM ul {
+		
+			ul {
 				list-style-type: none;
 				margin: 0px;
 				padding: 0px;
 				display: block;
 			}
-			.MM li {
+			li {
 				font-family: Arial, Helvetica, sans-serif;
 				font-size: 12px;
 				line-height: 26px;
@@ -61,7 +60,7 @@
 				width: 182px;
 				padding-left: 0px;
 			}
-			.MM {
+			ul {
 				width: 182px;
 				margin: 0px;
 				padding: 0px;
@@ -71,7 +70,7 @@
 				bottom: 0px;
 				clip: rect(0px,0px,0px,0px);
 			}
-			.MM a:link {
+			ul a:link {
 				font-family: Arial, Helvetica, sans-serif;
 				font-size: 12px;
 				line-height: 26px;
@@ -87,7 +86,7 @@
 				overflow: hidden;
 				text-decoration: none;
 			}
-			.MM a:visited {
+			ul a:visited {
 				font-family: Arial, Helvetica, sans-serif;
 				font-size: 12px;
 				line-height: 26px;
@@ -102,7 +101,7 @@
 				width: 182px;
 				text-decoration: none;
 			}
-			.MM a:active {
+			ul a:active {
 				font-family: Arial, Helvetica, sans-serif;
 				font-size: 12px;
 				line-height: 26px;
@@ -118,7 +117,7 @@
 				overflow: hidden;
 				text-decoration: none;
 			}
-			.MM a:hover {
+			ul a:hover {
 				font-family: Arial, Helvetica, sans-serif;
 				font-size: 12px;
 				line-height: 26px;
@@ -136,238 +135,142 @@
 			}
 		</style>
 	</head>
-
 	<body>
-		<table width="100%" height="280" border="0" cellpadding="0" cellspacing="0" style="background-color:#EEF2FB;">
-			<tr>
-				<td width="182" valign="top">
-				<div id="container">
-					<h1 class="type"><a href="javascript:void(0)">网站设置</a></h1>
-					<div class="content">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td><img src="__PUBLIC__/images/menu_topline.gif" width="182" height="5" /></td>
-							</tr>
-						</table>
-						<ul class="MM">
-							<li>
-								<a href="__GROUP__/System/index" target="main">基本配置</a>
-							</li>
-						</ul>
-					</div>
-					<h1 class="type"><a href="javascript:void(0)">会员管理</a></h1>
-					<div class="content">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td><img src="__PUBLIC__/images/menu_topline.gif" width="182" height="5" /></td>
-							</tr>
-						</table>
-						<ul class="MM">
-							<li>
-								<a href="__GROUP__/User/index" target="main">会员列表</a>
-							</li>
-							<!-- <li>
-							<a href="__GROUP__/User/regUser" target="main">添加会员</a>
-							</li> -->
-						</ul>
-					</div>
-
-					<h1 class="type"><a href="javascript:void(0)">分类模块</a></h1>
-					<div class="content">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td><img src="__PUBLIC__/images/menu_topline.gif" width="182" height="5" /></td>
-							</tr>
-						</table>
-						<ul class="MM">						
-							<li>
-								<a href="__GROUP__/Category/index" target="main">分类列表</a>
-							</li>
-
-						</ul>
-					</div>
-
-					<h1 class="type"><a href="javascript:void(0)">商品模块</a></h1>
-					<div class="content">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td><img src="__PUBLIC__/images/menu_topline.gif" width="182" height="5" /></td>
-							</tr>
-						</table>
-						<ul class="MM">
-							<li>
-								<a href="__GROUP__/Product/index" target="main">商品管理</a>
-							</li>
-							<li>
-								<a href="__GROUP__/ProductType/index" target="main">类型管理</a>
-							</li>
-							<li>
-								<a href="__GROUP__/ProductTypeAttr/index" target="main">属性管理</a>
-							</li>
-							<li>
-								<a href="__GROUP__/ProductTag/index" target="main">标签管理</a>
-							</li>
-
-						</ul>
-					</div>
-					<h1 class="type"><a href="javascript:void(0)">订单管理</a></h1>
-					<div class="content">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td><img src="__PUBLIC__/images/menu_topline.gif" width="182" height="5" /></td>
-							</tr>
-						</table>
-						<ul class="MM">
-							<li>
-								<a href="__GROUP__/Order/index" target="main">订单列表</a>
-							</li>
-
-						</ul>
-					</div>
-					<h1 class="type"><a href="javascript:void(0)"> 营销管理</a></h1>
-					<div class="content">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td><img src="__PUBLIC__/images/menu_topline.gif" width="182" height="5" /></td>
-							</tr>
-						</table>
-						<ul class="MM">
-							<li>
-								<a href="__GROUP__/Discount/index" target="main">活动列表</a>
-							</li>
-
-							<li>
-								<a href="__GROUP__/Discount/template" target="main">活动模板</a>
-							</li>
-							<li>
-								<a href="__GROUP__/Discount/coupon" target="main">优惠券管理</a>
-							</li>
-						</ul>
-					</div>
-					<h1 class="type"><a href="javascript:void(0)">支付模块</a></h1>
-					<div class="content">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td><img src="__PUBLIC__/images/menu_topline.gif" width="182" height="5" /></td>
-							</tr>
-						</table>
-						<ul class="MM">
-							<li>
-								<a href="__GROUP__/Payment/index" target="main">支付管理</a>
-							</li>
-
-						</ul>
-					</div>
-					<h1 class="type"><a href="javascript:void(0)">物流管理</a></h1>
-					<div class="content">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td><img src="__PUBLIC__/images/menu_topline.gif" width="182" height="5" /></td>
-							</tr>
-						</table>
-						<ul class="MM">
-							<li>
-								<a href="__GROUP__/Delivery/index" target="main">物流列表</a>
-							</li>
-
-						</ul>
-					</div>
-					<h1 class="type"><a href="javascript:void(0)">广告管理</a></h1>
-					<div class="content">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td><img src="__PUBLIC__/images/menu_topline.gif" width="182" height="5" /></td>
-							</tr>
-						</table>
-						<ul class="MM">
-							<li>
-								<a href="__GROUP__/Admanager/index" target="main">广告列表</a>
-							</li>
-						</ul>
-					</div>
-					<h1 class="type"><a href="javascript:void(0)">模板管理</a></h1>
-					<div class="content">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td><img src="__PUBLIC__/images/menu_topline.gif" width="182" height="5" /></td>
-							</tr>
-						</table>
-						<ul class="MM">
-							<li>
-								<a href="__GROUP__/Template/index" target="main">模板列表</a>
-							</li>
-							<li>
-								<a href="__GROUP__/Template/page" target="main">单页模板</a>
-							</li>
-						</ul>
-					</div>
-					<h1 class="type"><a href="javascript:void(0)">邮件管理</a></h1>
-					<div class="content">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td><img src="__PUBLIC__/images/menu_topline.gif" width="182" height="5" /></td>
-							</tr>
-						</table>
-						<ul class="MM">
-							<li>
-								<a href="__GROUP__/Email/index" target="main">邮箱列表</a>
-							</li>
-							<li>
-								<a href="__GROUP__/Email/template" target="main">邮件模板</a>
-							</li>
-							<li>
-								<a href="__GROUP__/Email/smtp" target="main">SMTP配置</a>
-							</li>
-							<li>
-								<a href="__GROUP__/Email/sub" target="main">订阅管理</a>
-							</li>
-						</ul>
-					</div>
-					<h1 class="type"><a href="javascript:void(0)">语言管理</a></h1>
-					<div class="content">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td><img src="__PUBLIC__/images/menu_topline.gif" width="182" height="5" /></td>
-							</tr>
-						</table>
-						<ul class="MM">
-							<li>
-								<a href="__GROUP__/Langue/index" target="main">列表</a>
-							</li>
-
-						</ul>
-					</div>
-					<!-- <h1 class="type"><a href="javascript:void(0)">远程数据管理</a></h1>
-					<div class="content">
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tr>
-					<td><img src="__PUBLIC__/images/menu_topline.gif" width="182" height="5" /></td>
-					</tr>
-					</table>
-					<ul class="MM">
+		<div id="accordion">
+			<h3><a href="javascript:void(0)">网站设置</a></h3>
+			<div>
+				<ul>
 					<li>
-					<a href="__GROUP__/DataSync/ProductType_Sync.aspx?ajax=true" target="main">远程数据类型</a>
+						<a href="__GROUP__/System/index" target="main">基本配置</a>
+					</li>
+				</ul>
+			</div>
+			<h3><a href="javascript:void(0)">会员管理</a></h3>
+			<div>
+				<ul class="MM">
+					<li>
+						<a href="__GROUP__/User/index" target="main">会员列表</a>
+					</li>
+				</ul>
+			</div>
+			<h3><a href="javascript:void(0)"> 分类管理</a></h3>
+			<div>
+				<ul class="MM">
+					<li>
+						<a href="__GROUP__/Category/index" target="main">分类列表</a>
+					</li>
+				</ul>
+			</div>
+			<h3><a href="javascript:void(0)"> 商品管理</a></h3>
+			<div>
+				<ul class="MM">
+					<li>
+						<a href="__GROUP__/Product/index" target="main">商品管理</a>
 					</li>
 					<li>
-					<a href="__GROUP__/DataSync/Product_Sync.aspx?ajax=true" target="main">远程数据产品</a>
+						<a href="__GROUP__/ProductType/index" target="main">类型管理</a>
 					</li>
 					<li>
-					<a href="__GROUP__/DataSync/ProductTypeAttr_Sync.aspx?ajax=true" target="main">远程数据产品</a>
+						<a href="__GROUP__/ProductTypeAttr/index" target="main">属性管理</a>
 					</li>
-					</ul>
-					</div> -->
-				</div>
-				<script type="text/javascript">
-                    var contents = document.getElementsByClassName('content');
-                    var toggles = document.getElementsByClassName('type');
+					<li>
+						<a href="__GROUP__/ProductTag/index" target="main">标签管理</a>
+					</li>
+				</ul>
+			</div>
+			<h3><a href="javascript:void(0)">订单管理</a></h3>
+			<div>
+				<ul class="MM">
+					<li>
+						<a href="__GROUP__/Order/index" target="main">订单列表</a>
+					</li>
 
-                    var myAccordion = new fx.Accordion(toggles, contents, {
-                        opacity : true,
-                        duration : 400
-                    });
-                    myAccordion.showThisHideOpen(contents[0]);
-				</script></td>
-			</tr>
-		</table>
+				</ul>
+			</div>
+			<h3><a href="javascript:void(0)"> 营销管理</a></h3>
+			<div>
+				<ul class="MM">
+					<li>
+						<a href="__GROUP__/Discount/index" target="main">活动列表</a>
+					</li>
+
+					<li>
+						<a href="__GROUP__/Discount/template" target="main">活动模板</a>
+					</li>
+					<li>
+						<a href="__GROUP__/Discount/coupon" target="main">优惠券管理</a>
+					</li>
+				</ul>
+			</div>
+			<h3><a href="javascript:void(0)"> 支付管理</a></h3>
+			<div>
+				<ul class="MM">
+					<li>
+						<a href="__GROUP__/Payment/index" target="main">支付管理</a>
+					</li>
+
+				</ul>
+			</div>
+			<h3><a href="javascript:void(0)"> 物流管理</a></h3>
+			<div>
+				<ul class="MM">
+					<li>
+						<a href="__GROUP__/Delivery/index" target="main">物流列表</a>
+					</li>
+
+				</ul>
+			</div>
+			<h3><a href="javascript:void(0)">广告管理</a></h3>
+			<div>
+				<ul class="MM">
+					<li>
+						<a href="__GROUP__/Admanager/index" target="main">广告列表</a>
+					</li>
+				</ul>
+			</div>
+			<h3><a href="javascript:void(0)">模板管理</a></h3>
+			<div>
+				<ul class="MM">
+					<li>
+						<a href="__GROUP__/Template/index" target="main">模板列表</a>
+					</li>
+					<li>
+						<a href="__GROUP__/Template/page" target="main">单页模板</a>
+					</li>
+				</ul>
+			</div>
+			<h3><a href="javascript:void(0)">邮件管理</a></h3>
+			<div>
+				<ul class="MM">
+					<li>
+						<a href="__GROUP__/Email/index" target="main">邮箱列表</a>
+					</li>
+					<li>
+						<a href="__GROUP__/Email/template" target="main">邮件模板</a>
+					</li>
+					<li>
+						<a href="__GROUP__/Email/smtp" target="main">SMTP配置</a>
+					</li>
+					<li>
+						<a href="__GROUP__/Email/sub" target="main">订阅管理</a>
+					</li>
+				</ul>
+			</div>
+			<h3><a href="javascript:void(0)">语言管理</a></h3>
+			<div>
+				<ul class="MM">
+					<li>
+						<a href="__GROUP__/Langue/index" target="main">列表</a>
+					</li>
+
+				</ul>
+			</div>
+		</div>
 	</body>
+	<script type="text/javascript">
+        $("#accordion").accordion({
+            heightStyle : "content",
+            active : 0,
+        });
+	</script>
 </html>

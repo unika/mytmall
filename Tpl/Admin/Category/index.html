@@ -127,15 +127,16 @@
                                 'ProductTypeId' : $("select").val()
                             }, function(data) {
                                 if (data.status == 1) {
-                                    var html = new String();
-                                    $.each(data.data, function(index, item) {
-                                        html += '<tr>';
-                                        html += '<td>' + item + '</td>';
-                                        html += '<td>' + index + '</td>';
-                                        html += '<td><a href="javascript:void(0)" aid="' + index + '">删除</a></td>';
-                                        html += '</tr>';
-                                    })
-                                    $("#table").find("tr:first").after(html);
+                                    // var html = new String();
+                                    // $.each(data.data, function(index, item) {
+                                    // html += '<tr>';
+                                    // html += '<td>' + item + '</td>';
+                                    // html += '<td>' + index + '</td>';
+                                    // html += '<td><a href="javascript:void(0)" aid="' + index + '">删除</a></td>';
+                                    // html += '</tr>';
+                                    // })
+                                    // $("#table").find("tr:first").after(html);
+                                    $.alert(data.info);
                                 } else {
                                     $.alert(data.info);
                                 }

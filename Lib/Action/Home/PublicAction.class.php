@@ -43,37 +43,25 @@ class PublicAction extends Action {
 	public function serach() {
 		import("ORG.Util.Page");
 		$product = D("Product");
-		$map['Name'] = array('like', $_POST['key']);
-		$count = $product -> field('id,Name,Price') -> where($map) -> count();
+		$map['Name'] = array('like', $this -> _post('key'));
+		$count = $product -> where($map) -> count();
 		$page = new Page($count, 25);
-		$list = $product -> field('id,Name,Price') -> where($map) -> limit($page -> firstRow . ',' . $page -> listRows) -> getProduct();
+		$list = $product -> where($map) -> limit($page -> firstRow . ',' . $page -> listRows) -> getProduct();
 		$show = $page -> show();
-		if ($list) {
-			$this -> assign("page", $show);
-			$this -> assign("list", $list);
-			$this -> display();
-		} else {
-			$this -> error("无此类产品");
-		}
+		$this -> assign("page", $show);
+		$this -> assign("list", $list);
+		$this -> display();
 	}
 
 	public function productList() {
 		$product = D("Product");
 		$map['Name'] = array('like', "%" . trim($_GET['term'] . "%"));
-		if (isset($_GET['term'])) {
-			$list = $product -> field("Name") -> where($map) -> select();
-		} else {
-			echo json_encode("['无此产品']");
-			exit();
-		}
-
+		$list = $product -> distinct(true) -> where($map) -> getField("Name", TRUE);
 		if ($list) {
-			foreach ($list as $key => $value) {
-				$data[] = $value['Name'];
-			}
-			echo json_encode($data);
+			//直接输出json字符形式,,给jquery自动完成传递数据
+			echo json_encode($list);
 		} else {
-			echo json_encode("['无此产品']");
+			$this -> error("无此产品");
 		}
 	}
 

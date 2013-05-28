@@ -130,82 +130,82 @@
 	<div class="right">
 		<!--产品信息Widget开始-->
 		<script>
-			//产品属性
-			$(document).ready(function() {
-				//评论星星
-				$('#star').raty({
-					path : '__PUBLIC__/Js/raty/Img'
-				});
-				$(".add").click(function() {
-					var json = new Array();
-					$(".colorb").each(function(i) {
-						if ($(this).hasClass("colorA")) {
-							//将选取产品的属性存入一个数组
-							//json.push('"' + $(this).attr("name") + '":"' + $.trim($(this).text()) + '"');
+            //产品属性
+            $(document).ready(function() {
+                //评论星星
+                $('#star').raty({
+                    path : '__PUBLIC__/Js/raty/Img'
+                });
+                $(".add").click(function() {
+                    var json = new Array();
+                    $(".colorb").each(function(i) {
+                        if ($(this).hasClass("colorA")) {
+                            //将选取产品的属性存入一个数组
+                            //json.push('"' + $(this).attr("name") + '":"' + $.trim($(this).text()) + '"');
 
-							json.push($(this).attr("name") + ':' + $.trim($(this).text()));
+                            json.push($(this).attr("name") + ':' + $.trim($(this).text()));
 
-						}
-					});
-					$.post("/Cart/addCart", {
-						"id" : $(this).attr("aid"),
-						"image" : $("#minImage").attr("src"),
-						'attrvalue' : json,
-						"num" : $("#qty").val(),
-						"product_name" : $("#sys_pn").text(),
-						"price" : $(".curprice").text(),//当前价格
-					}, function(data) {
-						if (data.status == 1) {
-							//更改头部购物车数量
-							$("#item").text(data.data.message.total_num);
-							$.alert(data.info);
-						} else {
-							$.alert(data.info);
-						}
+                        }
+                    });
+                    $.post("/Cart/addCart", {
+                        "id" : $(this).attr("aid"),
+                        "image" : $("#minImage").attr("src"),
+                        'attrvalue' : json,
+                        "num" : $("#qty").val(),
+                        "product_name" : $("#sys_pn").text(),
+                        "price" : $(".curprice").text(),//当前价格
+                    }, function(data) {
+                        if (data.status == 1) {
+                            //更改头部购物车数量
+                            $("#item").text(data.data.message.total_num);
+                            $.alert(data.info);
+                        } else {
+                            $.alert(data.info);
+                        }
 
-					}, 'json');
-				})
-				//tab切换
-				$("#index ul li").click(function() {
-					var tmp;
-					$(this).addClass("hover");
-					$(this).parents("ul").find("li").not(this).removeClass("hover");
-					tmp = $(this).index();
-					$(this).parents("ol").find("li").removeClass("hover");
-					$("#index ol li").each(function() {
-						if ($(this).index() == tmp) {
-							$(this).addClass("hover");
-						} else {
-							$(this).removeClass("hover");
-						}
-					});
-				});
-				//用户评论
-				$(".comment").click(function() {
-					$.post("__URL__/addComment", $("#comment").serialize(), function(data) {
-						$.alert(data.info);
-					}, 'json');
+                    }, 'json');
+                })
+                //tab切换
+                $("#index ul li").click(function() {
+                    var tmp;
+                    $(this).addClass("hover");
+                    $(this).parents("ul").find("li").not(this).removeClass("hover");
+                    tmp = $(this).index();
+                    $(this).parents("ol").find("li").removeClass("hover");
+                    $("#index ol li").each(function() {
+                        if ($(this).index() == tmp) {
+                            $(this).addClass("hover");
+                        } else {
+                            $(this).removeClass("hover");
+                        }
+                    });
+                });
+                //用户评论
+                $(".comment").click(function() {
+                    $.post("__URL__/addComment", $("#comment").serialize(), function(data) {
+                        $.alert(data.info);
+                    }, 'json');
 
-				});
-				//改变数量按钮
-				var tmp;
-				$(".addgoods").click(function() {
-					tmp = $("#qty").val();
-					$("#qty").val(parseInt(tmp) + 1);
-				});
-				$(".delgoods").click(function() {
-					tmp = $("#qty").val();
-					if (tmp <= 1) {
-						return false;
-					}
-					$("#qty").val(parseInt(tmp) - 1);
-				});
-				$(".colorb").click(function() {
-					$(this).toggleClass("colorA");
-					$(this).parent().find("span").not(this).removeClass("colorA");
-				});
+                });
+                //改变数量按钮
+                var tmp;
+                $(".addgoods").click(function() {
+                    tmp = $("#qty").val();
+                    $("#qty").val(parseInt(tmp) + 1);
+                });
+                $(".delgoods").click(function() {
+                    tmp = $("#qty").val();
+                    if (tmp <= 1) {
+                        return false;
+                    }
+                    $("#qty").val(parseInt(tmp) - 1);
+                });
+                $(".colorb").click(function() {
+                    $(this).toggleClass("colorA");
+                    $(this).parent().find("span").not(this).removeClass("colorA");
+                });
 
-			})
+            })
 		</script>
 		<style>
 			.attrValue {
@@ -222,10 +222,10 @@
 			<div id="proinfo">
 				<div class="img">
 					<div class="main_img">
-						<?php if(is_array($Img)): foreach($Img as $keys=>$vo): if(($vo["UseType"]) == "1"): ?><a target="_top" class="jqzoom" href="/Upload/Product/<?php echo ($vo["Img"]); ?>"> <img src="/Upload/Product/<?php echo ($vo["Img"]); ?>" id="minImage" alt="<?php echo ($Name); ?>" width="400" /></a><?php endif; endforeach; endif; ?>
+						<?php if(is_array($Img)): foreach($Img as $keys=>$vo): if(($vo["UseType"]) == "1"): ?><a target="_top" class="jqzoom" href="<?php echo ($vo["Img"]); ?>"> <img src="<?php echo ($vo["Img"]); ?>" id="minImage" alt="<?php echo ($Name); ?>" width="400" /></a><?php endif; endforeach; endif; ?>
 					</div>
 					<div class="min_img">
-						<?php if(is_array($Img)): foreach($Img as $keys=>$vo): if(($vo["UseType"]) != "1"): ?><a target="_top" class="jqzoom" href="#"> <img src="/Upload/Product/<?php echo ($vo["Img"]); ?>" id="minImage" alt="<?php echo ($Name); ?>" width="90" /></a><?php endif; endforeach; endif; ?>
+						<?php if(is_array($Img)): foreach($Img as $keys=>$vo): if(($vo["UseType"]) != "1"): ?><a target="_top" class="jqzoom" href="#"> <img src="<?php echo ($vo["Img"]); ?>" id="minImage" alt="<?php echo ($Name); ?>" width="90" /></a><?php endif; endforeach; endif; ?>
 					</div>
 				</div>
 				<div class="info">

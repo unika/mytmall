@@ -44,12 +44,12 @@
 				}
 			</style>
 			<script>
-				$(document).ready(function() {
-					$(".colorb").click(function() {
-						$(this).addClass("colorA");
-						$(this).parent().find("span").not(this).removeClass("colorA");
-					});
-				});
+                $(document).ready(function() {
+                    $(".colorb").click(function() {
+                        $(this).addClass("colorA");
+                        $(this).parent().find("span").not(this).removeClass("colorA");
+                    });
+                });
 			</script>
 			<foreach name="AttrValue" item="vo" key="keys">
 				<div style="border: 1px solid rgb(204, 204, 204); margin: 2px 0px; padding: 7px;">
@@ -75,16 +75,16 @@
 			</div>
 			<ul style="display: none;" id="choose">
 				<li class="clear"></li>
-			</ul>	
+			</ul>
 
 			<div class="pager">
 				<div style=" float: right;">
 					<select id="sortBy" onchange="location.href=this.value">
-						<option value="/Gucci-c-168.html?catid=168&amp;orderby=new_items">Sort by: new_items</option><option value="/Gucci-c-168.html?catid=168&amp;orderby=best_sellers">Sort by: best_sellers</option><option value="/Gucci-c-168.html?catid=168&amp;orderby=price_high_to_low">Sort by: price_high_to_low</option><option value="/Gucci-c-168.html?catid=168&amp;orderby=price_low_to_high">Sort by: price_low_to_high</option><option value="/Gucci-c-168.html?catid=168&amp;orderby=name_a_z" selected="selected">Sort by: name_a_z</option><option value="/Gucci-c-168.html?catid=168&amp;orderby=name_z_a">Sort by: name_z_a</option>
+						<option value="">Sort by: new_items</option><option value="">Sort by: best_sellers</option><option value="">Sort by: price_high_to_low</option><option value="">Sort by: price_low_to_high</option><option value="/Gucci-c-168.html?catid=168&amp;orderby=name_a_z" selected="selected">Sort by: name_a_z</option><option value="">Sort by: name_z_a</option>
 					</select>
 					&nbsp;
 					<select id="PageSize" onchange="location.href=this.value">
-						<option value="#" selected="selected">20 Per Page</option><option value="/Gucci-c-168.html?catid=168&amp;pagesize=40">40 Per Page</option><option value="/Gucci-c-168.html?catid=168&amp;pagesize=60">60 Per Page</option><option value="/Gucci-c-168.html?catid=168&amp;pagesize=80">80 Per Page</option><option value="/Gucci-c-168.html?catid=168&amp;pagesize=100">100 Per Page</option>
+						<option value="#" selected="selected">20 Per Page</option><option value="">40 Per Page</option><option value="">60 Per Page</option><option value="">80 Per Page</option><option value="">100 Per Page</option>
 					</select>
 				</div>
 			</div>
@@ -93,8 +93,8 @@
 				<div class="index_new_mian">
 					<volist name="list" id="vo">
 						<div class="list">
-							<a target="_top" class="l_img" href="/Product/show/id/{$vo.id}" title="{$vo.Name}"><img src="/Upload/Product/{$vo.Img.Img}" alt="Gucci Active Mask Sunglasses"></a>
-							<a target="_top" class="l_name" title="{$vo.Name}" href="/Product/show/id/{$vo.id}">{$vo.Name}</a>
+							<a target="_top" class="l_img" href="/Product/show/Id/{$vo.Id}" title="{$vo.Name}"><img src="/Upload/Product/{$vo.Img}" alt="Gucci Active Mask Sunglasses"></a>
+							<a target="_top" class="l_name" title="{$vo.Name}" href="/Product/show/Id/{$vo.Id}">{$vo.Name}</a>
 							<div class="price">
 								<span class="sys_cur">$</span><span class="sys_p">{$vo.Price} </span>
 							</div>

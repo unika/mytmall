@@ -218,5 +218,12 @@ class UserAction extends Action {
 		}
 	}
 
+	public function myorder() {
+		$order = D("Orderinfo");
+		$map['C_Id'] = $_SESSION['uid'];
+		$data = $order -> where($map) -> getField("OrderId,OrderPrice,OrderTime,CompleteTime", TRUE);
+		$this -> assign("list", $data);
+	}
+
 }
 ?>

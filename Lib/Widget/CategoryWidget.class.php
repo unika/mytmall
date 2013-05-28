@@ -7,8 +7,10 @@
  */
 class CategoryWidget extends Widget {
 	public function render($data) {
-		$category = D("Producttype");
-		$data['category'] = $category -> field("id,name") -> where("pid=0") -> select();
+		$category = D("Category");
+		$list = $category -> getField("Id,Name,Pid", TRUE);
+		$data['category'] = arrayPidProcess($list, $res, '0', '0');
+		//尾数0,可以控制层数
 		$content = $this -> renderFile('Category', $data);
 		return $content;
 	}

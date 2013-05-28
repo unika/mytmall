@@ -59,26 +59,23 @@
 							EUR</label> -->
 						</div>
 						<script>
-							$(document).ready(function() {
-								$('#Gstr').autocomplete({
-									minLength : 0,
-									max : 10,
-									width : 10,
-									autoFill : true,
-									source : "/Public/productList",
-								});
+                            $(document).ready(function() {          
+                                $('#Gstr').autocomplete({
+                                    minLength : 0,
+                                    max : 10,
+                                    width : 10,
+                                    autoFill : true,
+                                    source : "/Public/productList",
 
-								$("#loading").ajaxStart(function() {
-									$(this).show();
-								})
-							})
+                                });
+                            })
 
 						</script>
 
 						<!--顶部搜索Widget开始-->
 						<form method="post" name="mini-search" target="_blank" action="/Public/serach">
 							<input id="go" value=" " alt="Search" src="__MYSTYLE__Images/go.jpg" type="image">
-							<input value="Oakley  Sunglasses" onblur="" onfocus="" name="key" id="Gstr" type="text">
+							<input value="" onblur="" onfocus="" name="key" id="Gstr" type="text">
 						</form>
 						<!--顶部搜索Widget开始-->
 					</div>
@@ -124,6 +121,16 @@
 		</div>
 
 		<div id="right">
+			<!-------------------------下级目录列表开始----------------------------------------------------->
+			<div class="subcat">
+				<ul style="margin: 0px; padding: 0px;">
+					<?php if(is_array($subcat)): $i = 0; $__LIST__ = $subcat;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li style="float: left; width: 120px; border: 1px dotted rgb(204, 204, 204); text-align: center; margin: 2px; line-height: 25px;">
+							<a href="__URL__/<?php echo ($vo["Name"]); ?>"><?php echo ($vo["Name"]); ?></a>
+						</li><?php endforeach; endif; else: echo "" ;endif; ?>
+				</ul>
+			</div>
+			<!-------------------------下级目录列表结束---------------------------------------------------->
+
 			<h2 class="iuy_cate_title" style="display:"><a target="_top" href="" title="<?php echo ($name); ?>"><?php echo ($name); ?></a></h2>
 			<!--频道或类说明-->
 			<div id="des" style="display:"></div>
@@ -140,45 +147,45 @@
 				}
 			</style>
 			<script>
-				$(document).ready(function() {
-					$(".colorb").click(function() {
-						$(this).toggleClass("colorA");
-						$(this).parent().find("span").not(this).removeClass("colorA");
-						var json = new Array();
-						$(".colorb").each(function(i) {
-							if ($(this).hasClass("colorA")) {
-								//将选取产品的属性存入一个数组
-								json.push('"' + $(this).attr("name") + '":"' + $.trim($(this).text()) + '"');
-							}
-						});
-						//将一个数组转为json字符串用于传值到后端
-						var a = $.parseJSON('{' + json.join() + '}');
-						$.post("/Category/serach", a, function(data) {
-							$(".index_new_mian").empty();
+                $(document).ready(function() {
+                    $(".colorb").click(function() {
+                        $(this).toggleClass("colorA");
+                        $(this).parent().find("span").not(this).removeClass("colorA");
+                        var json = new Array();
+                        $(".colorb").each(function(i) {
+                            if ($(this).hasClass("colorA")) {
+                                //将选取产品的属性存入一个数组
+                                json.push('"' + $(this).attr("name") + '":"' + $.trim($(this).text()) + '"');
+                            }
+                        });
+                        //将一个数组转为json字符串用于传值到后端
+                        var a = $.parseJSON('{' + json.join() + '}');
+                        $.post("/Category/serach", a, function(data) {
+                            $(".index_new_mian").empty();
 
-							if (data.status == 1) {
-								var html = new String();
-								$.each(data.data, function(index, item) {
-									html += '<div class="list">';
-									html += '<a class="l_img" title="' + item.Name + '" href="/Product/show/id/' + item.id + '" target="_top">';
-									html += '<img alt="' + item.Name + '" src="/Upload/Product/' + item.Img.Img+ '">';
-									html += '</a>';
-									html += '<a class="l_name" href="/Product/show/id/' + item.id + '" title="' + item.Name + '" target="_top">' + item.Name + '</a>';
-									html += '<div class="price">';
-									html += '<span class="sys_cur">$</span>';
-									html += '<span class="sys_p">' + item.Price + ' </span>';
-									html += '</div>';
-									html += '</div>';
-								})
-								$(".index_new_mian").append(html);
-							} else {
-								$(".index_new_mian").append(data.info);
-							}
+                            if (data.status == 1) {
+                                var html = new String();
+                                $.each(data.data, function(index, item) {
+                                    html += '<div class="list">';
+                                    html += '<a class="l_img" title="' + item.Name + '" href="/Product/show/id/' + item.id + '" target="_top">';
+                                    html += '<img alt="' + item.Name + '" src="/Upload/Product/' + item.Img.Img + '">';
+                                    html += '</a>';
+                                    html += '<a class="l_name" href="/Product/show/id/' + item.id + '" title="' + item.Name + '" target="_top">' + item.Name + '</a>';
+                                    html += '<div class="price">';
+                                    html += '<span class="sys_cur">$</span>';
+                                    html += '<span class="sys_p">' + item.Price + ' </span>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                })
+                                $(".index_new_mian").append(html);
+                            } else {
+                                $(".index_new_mian").append(data.info);
+                            }
 
-						}, 'json');
+                        }, 'json');
 
-					});
-				});
+                    });
+                });
 			</script>
 			<?php if(is_array($AttrValue)): foreach($AttrValue as $keys=>$vo): ?><div style="border: 1px solid rgb(204, 204, 204); margin: 2px 0px; padding: 7px;">
 					<span> <?php echo ($vo["Name"]); ?> </span>
@@ -198,32 +205,25 @@
 
 				<li class="clear"></li>
 			</ul>
-			<script type="text/javascript">
-				if ($("#sys_search a").length < 1) {
-					$("#sys_search").hide();
-				}
-				if ($("#choose li").length < 2) {
-					$("#choose").hide();
-				}
-			</script>
 
 			<div class="pager">
 				<div style=" float: right;">
-					<select id="sortBy" onchange="location.href=this.value">
-						<option value="/Gucci-c-168.html?catid=168&amp;orderby=new_items">Sort by: new_items</option><option value="/Gucci-c-168.html?catid=168&amp;orderby=best_sellers">Sort by: best_sellers</option><option value="/Gucci-c-168.html?catid=168&amp;orderby=price_high_to_low">Sort by: price_high_to_low</option><option value="/Gucci-c-168.html?catid=168&amp;orderby=price_low_to_high">Sort by: price_low_to_high</option><option value="/Gucci-c-168.html?catid=168&amp;orderby=name_a_z" selected="selected">Sort by: name_a_z</option><option value="/Gucci-c-168.html?catid=168&amp;orderby=name_z_a">Sort by: name_z_a</option>
+					<select id="sortBy">
+						<option value="#">Sort by: new_items</option><option value="#">Sort by: best_sellers</option><option value="#">Sort by: price_high_to_low</option><option value="#">Sort by: price_low_to_high</option><option value="/Gucci-c-168.html?catid=168&amp;orderby=name_a_z" selected="selected">Sort by: name_a_z</option><option value="#">Sort by: name_z_a</option>
 					</select>
 					&nbsp;
 					<select id="PageSize" onchange="location.href=this.value">
-						<option value="#" selected="selected">20 Per Page</option><option value="/Gucci-c-168.html?catid=168&amp;pagesize=40">40 Per Page</option><option value="/Gucci-c-168.html?catid=168&amp;pagesize=60">60 Per Page</option><option value="/Gucci-c-168.html?catid=168&amp;pagesize=80">80 Per Page</option><option value="/Gucci-c-168.html?catid=168&amp;pagesize=100">100 Per Page</option>
+						<option value="#" selected="selected">20 Per Page</option><option value="#">40 Per Page</option><option value="#">60 Per Page</option><option value="#">80 Per Page</option><option value="#">100 Per Page</option>
 					</select>
 				</div>
+
 			</div>
 			<div class="clear"></div>
 			<div class="list_search">
 				<div class="index_new_mian">
 					<?php if(is_array($result)): $i = 0; $__LIST__ = $result;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="list">
-							<a target="_top" class="l_img" href="/Product/show/id/<?php echo ($vo["id"]); ?>" title="<?php echo ($vo["Name"]); ?>"><img src="/Upload/Product/<?php echo ($vo["Img"]["Img"]); ?>" alt="Gucci Active Mask Sunglasses"></a>
-							<a target="_top" class="l_name" title="<?php echo ($vo["Name"]); ?>" href="/Product/show/id/<?php echo ($vo["id"]); ?>"><?php echo ($vo["Name"]); ?></a>
+							<a target="_top" class="l_img" href="/Product/show/Id/<?php echo ($vo["Id"]); ?>" title="<?php echo ($vo["Name"]); ?>"><img src="<?php echo ($vo["Img"]); ?>" alt="Gucci Active Mask Sunglasses"></a>
+							<a target="_top" class="l_name" title="<?php echo ($vo["Name"]); ?>" href="/Product/show/Id/<?php echo ($vo["Id"]); ?>"><?php echo ($vo["Name"]); ?></a>
 							<div class="price">
 								<span class="sys_cur">$</span><span class="sys_p"><?php echo ($vo["Price"]); ?> </span>
 							</div>

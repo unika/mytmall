@@ -101,13 +101,17 @@ end;
 					foreach ($productlist as $key => $value) {
 						$aggregate -> CategroyId = $ids;
 						$aggregate -> ProductId = $value['productid'];
-						$aggregate -> add();
+						$result = $aggregate -> add();
 					}
-
 				}
-				fclose($handle);
 			}
 		}
+		if ($result) {
+			$this -> success("创建成功");
+		} else {
+			$this -> error("创建失败");
+		}
+
 		//echo $category -> getLastsql();
 		//
 		// $level = "level" . $categoryId[0];
