@@ -80,10 +80,11 @@ class ProductModel extends Model {
 		$list = $this -> find();
 		$image = M("Productimg");
 		$type = M("Producttype");
-		$img = $image -> field('Img,UseType') -> where('ProductId=' . $list['Id']) -> select();
-		$typeinfo = $type -> field('Id,Name') -> where('Id=' . $list['ProductTypeId']) -> find();
+		$img = $image -> where('Id=' . $list['ProductImgId']) -> getField('Id,Img,UseType', TRUE);
+		$type = $type -> where('Id=' . $list['ProductTypeId']) -> getField('Id,Name');
+		$list['AttrValue'] = json_decode($list['AttrValue'], TRUE);
 		$list['Img'] = $img;
-		$list['Typename'] = $typeinfo;
+		$list['Typename'] = $type;
 		return $list;
 	}
 

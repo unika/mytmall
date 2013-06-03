@@ -533,23 +533,10 @@ category_seo += '</tbody>';
 category_seo += '</table>';
 category_seo += '</form>';
 
-var classify = '<form action="" onsubmit="return false;" id="classify">';
-classify += '<table>';
-classify += '<tr><td>推荐名</td><td>';
-classify += '<input type="text" name="Iden" id="Iden" />';
-classify += '</td></tr>';
-classify += '<tr><td>推荐别名</td><td>';
-classify += '<input type="text" name="IdenAlias" id="IdenAlias" />';
-classify += '</td></tr>';
-classify += '</table>';
-classify += '</form>';
-
 function uploadimage(url) {
-	var image = '<iframe name="iframe" style="display:none;" frameborder="0"></iframe>';
-	image += '<form id="image" target="iframe" method="post" action="' + url + '" enctype="multipart/form-data">';
-	image += '<input type="file" id="file" name="file" />';
-	image += '</form>'
-	return image;
-
+    var image = '<iframe name="iframe" style="display:none;" frameborder="0"></iframe>';
+    image += '<form id="image" target="iframe" method="post" action="' + url + '" enctype="multipart/form-data">';
+    image += '<input type="file" id="file" name="file" />';
+    image += '</form>'
+    return image;
 }
-

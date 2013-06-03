@@ -4,15 +4,8 @@
  */
 
 class CategoryAction extends Action {
-	public function changeData() {
-		$model = new Model();
-		$list = $model -> query("select * from `shop_productimg` limit 1494 , 2000");
-		foreach ($list as $key => $value) {
-			$sql = "UPDATE `shop_productimg` SET `Img` = replace (`Img`," . $value['Id'] . ',' . $value['ProductId'] . ") WHERE `Img` LIKE '%" . $value['Id'] . "%' and Id=" . $value['Id'] . ";";
-			$model -> query($sql);
-
-		}
-
+	public function index() {
+		echo "abc";
 	}
 
 	//执行前端的空操作,利于seo

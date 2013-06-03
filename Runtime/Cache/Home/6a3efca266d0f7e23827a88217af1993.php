@@ -8,6 +8,7 @@
 		<meta name="keywords" content="<?php echo ($keywords); ?>">
 		<script src="__PUBLIC__/Js/jquery.js" type="text/javascript"></script>
 		<script src="__PUBLIC__/Js/city.js" type="text/javascript"></script>
+		<script src="__PUBLIC__/Js/common.js" type="text/javascript"></script>
 		<script src="__PUBLIC__/Js/artDialog/jquery.artDialog.min.js" type="text/javascript"></script>
 		<script src="__PUBLIC__/Js/artDialog/artDialog.plugins.min.js" type="text/javascript"></script>
 		<script src="__PUBLIC__/Js/jquery-ui.js" type="text/javascript"></script>
@@ -25,9 +26,9 @@
 					<h1><a target="_top" title="" href="/"> <img title="Cheap Oakley Sunglasses,Wholesale Oakley Sunglasses,Discount Oakley Sunglasses" alt="Cheap Oakley Sunglasses,Wholesale Oakley Sunglasses,Discount Oakley Sunglasses" src="__MYSTYLE__Images/logo.jpg" align="left"></a></h1>
 					<div class="cur_search">
 						<div class="cart">
-							<?php if(empty($_SESSION['cart']['total_num'])): ?><a target="_top" href="__ROOT__/Cart" rel="nofollow" class="sys_cart">My Bag:( <span id="item">0</span> items)</a>
+							<?php if(empty($_SESSION['cart']['total_number'])): ?><a target="_top" href="__ROOT__/Cart" rel="nofollow" class="sys_cart">My Bag:( <span id="item">0</span> items)</a>
 								<?php else: ?>
-								<a target="_top" href="__ROOT__/Cart" rel="nofollow" class="sys_cart">My Bag:( <span id="item"><?php echo ($_SESSION['cart']['total_num']); ?></span> items)</a><?php endif; ?>
+								<a target="_top" href="__ROOT__/Cart" rel="nofollow" class="sys_cart">My Bag:( <span id="item"><?php echo ($_SESSION['cart']['total_number']); ?></span> items)</a><?php endif; ?>
 
 							<a target="_top" href="#" rel="nofollow" class="check">Checkout</a><div id="showcart"></div>
 						</div>
@@ -59,26 +60,23 @@
 							EUR</label> -->
 						</div>
 						<script>
-							$(document).ready(function() {
-								$('#Gstr').autocomplete({
-									minLength : 0,
-									max : 10,
-									width : 10,
-									autoFill : true,
-									source : "/Public/productList",
-								});
+                            $(document).ready(function() {
+                                $('#Gstr').autocomplete({
+                                    minLength : 0,
+                                    max : 10,
+                                    width : 10,
+                                    autoFill : true,
+                                    source : "/Public/productList",
 
-								$("#loading").ajaxStart(function() {
-									$(this).show();
-								})
-							})
+                                });
+
+                            })
 
 						</script>
-
 						<!--顶部搜索Widget开始-->
 						<form method="post" name="mini-search" target="_blank" action="/Public/serach">
-							<input id="go" value=" " alt="Search" src="__MYSTYLE__Images/go.jpg" type="image">
-							<input value="Oakley  Sunglasses" onblur="" onfocus="" name="key" id="Gstr" type="text">
+							<input id="go" value=""  alt="Search" src="__MYSTYLE__Images/go.jpg" type="image">
+							<input value="" name="key" id="Gstr" type="text">
 						</form>
 						<!--顶部搜索Widget开始-->
 					</div>
@@ -128,43 +126,12 @@
 	<script src="__PUBLIC__/Js/raty/jquery.raty.min.js" type="text/javascript"></script>
 	<link href="__PUBLIC__/Js/raty/css/demo.css" rel="stylesheet" type="text/css" />
 	<div class="right">
-		<!--产品信息Widget开始-->
-		<script>
-            //产品属性
+		<script>          
             $(document).ready(function() {
                 //评论星星
                 $('#star').raty({
                     path : '__PUBLIC__/Js/raty/Img'
-                });
-                $(".add").click(function() {
-                    var json = new Array();
-                    $(".colorb").each(function(i) {
-                        if ($(this).hasClass("colorA")) {
-                            //将选取产品的属性存入一个数组
-                            //json.push('"' + $(this).attr("name") + '":"' + $.trim($(this).text()) + '"');
-
-                            json.push($(this).attr("name") + ':' + $.trim($(this).text()));
-
-                        }
-                    });
-                    $.post("/Cart/addCart", {
-                        "id" : $(this).attr("aid"),
-                        "image" : $("#minImage").attr("src"),
-                        'attrvalue' : json,
-                        "num" : $("#qty").val(),
-                        "product_name" : $("#sys_pn").text(),
-                        "price" : $(".curprice").text(),//当前价格
-                    }, function(data) {
-                        if (data.status == 1) {
-                            //更改头部购物车数量
-                            $("#item").text(data.data.message.total_num);
-                            $.alert(data.info);
-                        } else {
-                            $.alert(data.info);
-                        }
-
-                    }, 'json');
-                })
+                });  
                 //tab切换
                 $("#index ul li").click(function() {
                     var tmp;
@@ -187,25 +154,13 @@
                     }, 'json');
 
                 });
-                //改变数量按钮
-                var tmp;
-                $(".addgoods").click(function() {
-                    tmp = $("#qty").val();
-                    $("#qty").val(parseInt(tmp) + 1);
-                });
-                $(".delgoods").click(function() {
-                    tmp = $("#qty").val();
-                    if (tmp <= 1) {
-                        return false;
-                    }
-                    $("#qty").val(parseInt(tmp) - 1);
-                });
                 $(".colorb").click(function() {
                     $(this).toggleClass("colorA");
                     $(this).parent().find("span").not(this).removeClass("colorA");
                 });
 
             })
+         
 		</script>
 		<style>
 			.attrValue {
@@ -222,20 +177,19 @@
 			<div id="proinfo">
 				<div class="img">
 					<div class="main_img">
-						<?php if(is_array($Img)): foreach($Img as $keys=>$vo): if(($vo["UseType"]) == "1"): ?><a target="_top" class="jqzoom" href="<?php echo ($vo["Img"]); ?>"> <img src="<?php echo ($vo["Img"]); ?>" id="minImage" alt="<?php echo ($Name); ?>" width="400" /></a><?php endif; endforeach; endif; ?>
+						<?php if(is_array($Img)): foreach($Img as $key=>$vo): if(($vo["UseType"]) == "1"): ?><a target="_top" class="jqzoom" href="<?php echo ($Img); ?>"> <img src="<?php echo ($vo["Img"]); ?>" id="minImage" alt="<?php echo ($Name); ?>" width="400" /></a><?php endif; endforeach; endif; ?>
 					</div>
 					<div class="min_img">
-						<?php if(is_array($Img)): foreach($Img as $keys=>$vo): if(($vo["UseType"]) != "1"): ?><a target="_top" class="jqzoom" href="#"> <img src="<?php echo ($vo["Img"]); ?>" id="minImage" alt="<?php echo ($Name); ?>" width="90" /></a><?php endif; endforeach; endif; ?>
+						<?php if(is_array($Img)): foreach($Img as $key=>$vo): if(($vo["UseType"]) != "1"): ?><a target="_top" class="jqzoom" href="#"> <img src="<?php echo ($vo["Img"]); ?>" id="minImage" alt="<?php echo ($Name); ?>" width="90" /></a><?php endif; endforeach; endif; ?>
 					</div>
 				</div>
 				<div class="info">
 					<div class="pro_con">
-						<h2 id="sys_pn"><a target="_top" href="" title="<?php echo ($Name); ?>"><?php echo ($Name); ?></a></h2>
+						<h2 id="sys_pn"><?php echo ($Name); ?></h2>
 						<div style=" width:160px;">
-							<?php if(empty($$score)): ?>Review: <img style=" margin-top:1px;" src="__MYSTYLE__Images/1star.jpg" alt="<?php echo ($Name); ?>">
+							<?php if(empty($score)): ?>Review: <img style=" margin-top:1px;" src="__MYSTYLE__Images/1star.jpg" alt="<?php echo ($Name); ?>">
 								<?php else: ?>
 								Review: <img style=" margin-top:1px;" src="__MYSTYLE__Images/<?php echo ($score); ?>star.jpg" alt="<?php echo ($Name); ?>"><?php endif; ?>
-
 						</div>
 						<div style="padding:6px 0">
 							Availability:
@@ -256,7 +210,7 @@
 							<!--属性循环-->
 							<div class="price">
 								<span>Price:</span>
-								<b class="sys_cur big_font">$</b><b class="sys_p big_font curprice"><?php echo ($Price); ?></b>
+								<b class="sys_cur big_font">$</b><b class="sys_p big_font curprice" id="price"><?php echo ($Price); ?></b>
 								<div class="clear"></div>
 							</div>
 
@@ -264,8 +218,8 @@
 								<font>Qty : </font>
 								<input id="qty" name="buyNum" value="1" size="5">
 								<div style="padding-bottom: 2px">
-									<a href="javascript:void(0);" class="addgoods"  style="display: block;"> <img src="__MYSTYLE__Images/good_detail_up.gif" style="cursor: pointer;" /></a>
-									<a href="javascript:void(0);"  class="delgoods" style="display: block;"> <img src="__MYSTYLE__Images/good_detail_down.gif" style="cursor: pointer;" /></a>
+									<a href="javascript:void(0);" class="addgoods1" onclick="addgoods('qty')"  style="display: block;"> <img src="__MYSTYLE__Images/good_detail_up.gif" style="cursor: pointer;" /></a>
+									<a href="javascript:void(0);"  class="delgoods" onclick="delgoods('qty')" style="display: block;"> <img src="__MYSTYLE__Images/good_detail_down.gif" style="cursor: pointer;" /></a>
 								</div>
 							</div>
 							<!--社会化插件开始-->
@@ -278,7 +232,8 @@
 
 							<!--社会化插件结束-->
 							<div class="clear"></div>
-							<input value="" class="add" aid="<?php echo ($id); ?>" src="__MYSTYLE__Images/add.jpg" type="image">
+							<input type="hidden" id="id" value="<?php echo ($Id); ?>" />
+							<input value="" class="addCart" onclick="addCart(this)" aid="<?php echo ($Id); ?>" src="__MYSTYLE__Images/add.jpg" type="image">
 							<div id="add"></div>
 						</form>
 						<div class="clear"></div>
@@ -345,7 +300,6 @@
 
 				</ol>
 			</div>
-
 			<div class="clear"></div>
 
 		</div>
@@ -366,7 +320,6 @@
 					<div class="may_price">
 						<span class="sys_cur">$</span><span class="sys_p">14.99</span>
 					</div>
-
 				</div>
 
 				<div class="list">
@@ -453,9 +406,7 @@
 	</div>
 </div>
 </div>
-
 <div class="clear"></div>
-
 <div id="foot" class="pfoot">
 	<img src="__MYSTYLE__Images/foot_top.jpg" usemap="#Map">
 	<map name="Map" id="Map">

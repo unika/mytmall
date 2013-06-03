@@ -8,6 +8,7 @@
 		<meta name="keywords" content="<?php echo ($keywords); ?>">
 		<script src="__PUBLIC__/Js/jquery.js" type="text/javascript"></script>
 		<script src="__PUBLIC__/Js/city.js" type="text/javascript"></script>
+		<script src="__PUBLIC__/Js/common.js" type="text/javascript"></script>
 		<script src="__PUBLIC__/Js/artDialog/jquery.artDialog.min.js" type="text/javascript"></script>
 		<script src="__PUBLIC__/Js/artDialog/artDialog.plugins.min.js" type="text/javascript"></script>
 		<script src="__PUBLIC__/Js/jquery-ui.js" type="text/javascript"></script>
@@ -25,9 +26,9 @@
 					<h1><a target="_top" title="" href="/"> <img title="Cheap Oakley Sunglasses,Wholesale Oakley Sunglasses,Discount Oakley Sunglasses" alt="Cheap Oakley Sunglasses,Wholesale Oakley Sunglasses,Discount Oakley Sunglasses" src="__MYSTYLE__Images/logo.jpg" align="left"></a></h1>
 					<div class="cur_search">
 						<div class="cart">
-							<?php if(empty($_SESSION['cart']['total_num'])): ?><a target="_top" href="__ROOT__/Cart" rel="nofollow" class="sys_cart">My Bag:( <span id="item">0</span> items)</a>
+							<?php if(empty($_SESSION['cart']['total_number'])): ?><a target="_top" href="__ROOT__/Cart" rel="nofollow" class="sys_cart">My Bag:( <span id="item">0</span> items)</a>
 								<?php else: ?>
-								<a target="_top" href="__ROOT__/Cart" rel="nofollow" class="sys_cart">My Bag:( <span id="item"><?php echo ($_SESSION['cart']['total_num']); ?></span> items)</a><?php endif; ?>
+								<a target="_top" href="__ROOT__/Cart" rel="nofollow" class="sys_cart">My Bag:( <span id="item"><?php echo ($_SESSION['cart']['total_number']); ?></span> items)</a><?php endif; ?>
 
 							<a target="_top" href="#" rel="nofollow" class="check">Checkout</a><div id="showcart"></div>
 						</div>
@@ -59,7 +60,7 @@
 							EUR</label> -->
 						</div>
 						<script>
-                            $(document).ready(function() {          
+                            $(document).ready(function() {
                                 $('#Gstr').autocomplete({
                                     minLength : 0,
                                     max : 10,
@@ -68,14 +69,14 @@
                                     source : "/Public/productList",
 
                                 });
+
                             })
 
 						</script>
-
 						<!--顶部搜索Widget开始-->
 						<form method="post" name="mini-search" target="_blank" action="/Public/serach">
-							<input id="go" value=" " alt="Search" src="__MYSTYLE__Images/go.jpg" type="image">
-							<input value="" onblur="" onfocus="" name="key" id="Gstr" type="text">
+							<input id="go" value=""  alt="Search" src="__MYSTYLE__Images/go.jpg" type="image">
+							<input value="" name="key" id="Gstr" type="text">
 						</form>
 						<!--顶部搜索Widget开始-->
 					</div>

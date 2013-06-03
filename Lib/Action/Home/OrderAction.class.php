@@ -13,6 +13,9 @@ class OrderAction extends Action {
 	}
 
 	public function step1() {
+		if ($cart -> goods == null) {
+			$this -> redirect("/Category", "请先前往商品页面选择商品,再使用优惠券");
+		}
 		$user = D("User");
 		$field = "username,firstName,secondName,postCode,email,address,tel,country,state,city";
 		$userInfo = $user -> field($field) -> where("id=" . $_SESSION['uid']) -> find();
@@ -172,7 +175,7 @@ class OrderAction extends Action {
 
 	public function orderPay() {
 		print_r($_REQUEST);
-		$order = D("Orderinfo");	
+		$order = D("Orderinfo");
 		$order -> C_FristName = $_REQUEST['deliveryname'];
 		$order -> C_SecondName = $_REQUEST['deliveryname'];
 		$order -> C_Address = $_REQUEST['deliveryaddress'];

@@ -26,8 +26,8 @@ class DiscountAction extends Action {
 	}
 
 	public function getTypelist() {
-		$type = D("Producttype");
 		//产品类型
+		$type = D("Producttype");
 		$data = $type -> select();
 		$typelist = arrayPidProcess($data, $res, '0', '0');
 		$typeTree = $type -> getTypetree('-', $typelist);
@@ -55,7 +55,7 @@ class DiscountAction extends Action {
 		$product = D("Product");
 		$count = $product -> where($map) -> count();
 		$page = New Page($count, 15);
-		//$field = "id,Name,Price,ProductImgId,DbNum,Status";
+		$field = "id,Name,Price,ProductImgId,DbNum,Status";
 		$show = $page -> show();
 		$list = $product -> field($field) -> where($map) -> limit($page -> firstRow . ',' . $page -> listRows) -> getProduct();
 		$data = array("page" => $show, "result" => $list, );
@@ -139,7 +139,6 @@ class DiscountAction extends Action {
 		}
 	}
 
-	//**************************************产品相关******************************************************
 	//****************************************优惠券********************************************************
 	public function delCoupon() {
 		$map['Id'] = $this -> _post("id");
@@ -194,7 +193,8 @@ class DiscountAction extends Action {
 		$template = D("Templateku");
 		$count = $template -> count();
 		$page = new Page($count, 25);
-		$list = $template -> order("id desc") -> field("Id,Type,Name,Designer,Image") -> limit($page -> firstRow . ',' . $page -> listRows) -> select();
+		$field = "Id,Type,Name,Designer,Image";
+		$list = $template -> order("id desc") -> field($field) -> limit($page -> firstRow . ',' . $page -> listRows) -> select();
 		$this -> assign("page", $page -> show());
 		$this -> assign("list", $list);
 		$this -> display();
@@ -202,7 +202,8 @@ class DiscountAction extends Action {
 
 	public function getTemplate() {
 		$template = D("Templateku");
-		$list = $template -> field("Id,Type,Name,Image") -> select();
+		$field = "Id,Type,Name,Designer,Image";
+		$list = $template -> field($field) -> select();
 		if ($list) {
 			$this -> ajaxReturn($list, '', 1);
 		} else {
@@ -238,7 +239,8 @@ class DiscountAction extends Action {
 		$template -> Image = $this -> _post("image");
 		file_put_contents(HTML_PATH . $template -> Name . ".html", html_entity_decode($template -> Html));
 		if ($id = $template -> add()) {
-			$list = $template -> field("PicPath,FilePath,Html", TRUE) -> find($id);
+			$field = "Id,Type,Name,Designer,Image";
+			$list = $template -> field($field, TRUE) -> find($id);
 			$this -> ajaxReturn($list, "活动模板添加成功", 1);
 		} else {
 			$this -> error("活动模板添加失败");
@@ -295,15 +297,13 @@ class DiscountAction extends Action {
 		$discount = D("Productdiscount");
 		$template = D("Templateku");
 		$product = D("Product");
-		$json = $discount -> where('id=' . $this -> _post('id')) -> getField("Productid");
-
-		$map['Id'] = array('in', json_decode($json, TRUE));
+		$data = $discount -> where('id=' . $this -> _post('id')) -> getField("Productid");
+		$map['Id'] = array('in', json_decode($data, TRUE));
 		$list = $product -> where($map) -> select();
-		//echo $product -> getLastsql();
-		$filename = $template -> where("id=" . $_POST['tmp_id']) -> getField("Name");
-		$this -> assign("list", $list);
-		$content = $this -> fetch(HTML_PATH . $filename . '.html');
+		$filename = $template -> where("id=" . $this -> _post('tmp_id')) -> getField("Name");
 		if ($list) {
+			$this -> assign("list", $list);
+			$content = $this -> fetch(HTML_PATH . $filename . '.html');
 			$this -> ajaxReturn($content, '', 1);
 		} else {
 			$this -> error("无产品");
@@ -317,9 +317,9 @@ class DiscountAction extends Action {
 		$template = D("Templateku");
 		$list = $template -> where($map) -> find();
 		$filename = $template -> where($map) -> getField("Name");
-		$this -> assign("name", $name);
-		$content = $this -> fetch(HTML_PATH . $filename . ".html");
 		if ($list) {
+			$this -> assign("name", $name);
+			$content = $this -> fetch(HTML_PATH . $filename . ".html");
 			$this -> ajaxReturn($content, '', 1);
 		} else {
 			$this -> error("无此模板");

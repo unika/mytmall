@@ -32,43 +32,12 @@
 	<script src="__PUBLIC__/Js/raty/jquery.raty.min.js" type="text/javascript"></script>
 	<link href="__PUBLIC__/Js/raty/css/demo.css" rel="stylesheet" type="text/css" />
 	<div class="right">
-		<!--产品信息Widget开始-->
-		<script>
-            //产品属性
+		<script>          
             $(document).ready(function() {
                 //评论星星
                 $('#star').raty({
                     path : '__PUBLIC__/Js/raty/Img'
-                });
-                $(".add").click(function() {
-                    var json = new Array();
-                    $(".colorb").each(function(i) {
-                        if ($(this).hasClass("colorA")) {
-                            //将选取产品的属性存入一个数组
-                            //json.push('"' + $(this).attr("name") + '":"' + $.trim($(this).text()) + '"');
-
-                            json.push($(this).attr("name") + ':' + $.trim($(this).text()));
-
-                        }
-                    });
-                    $.post("/Cart/addCart", {
-                        "id" : $(this).attr("aid"),
-                        "image" : $("#minImage").attr("src"),
-                        'attrvalue' : json,
-                        "num" : $("#qty").val(),
-                        "product_name" : $("#sys_pn").text(),
-                        "price" : $(".curprice").text(),//当前价格
-                    }, function(data) {
-                        if (data.status == 1) {
-                            //更改头部购物车数量
-                            $("#item").text(data.data.message.total_num);
-                            $.alert(data.info);
-                        } else {
-                            $.alert(data.info);
-                        }
-
-                    }, 'json');
-                })
+                });  
                 //tab切换
                 $("#index ul li").click(function() {
                     var tmp;
@@ -91,25 +60,13 @@
                     }, 'json');
 
                 });
-                //改变数量按钮
-                var tmp;
-                $(".addgoods").click(function() {
-                    tmp = $("#qty").val();
-                    $("#qty").val(parseInt(tmp) + 1);
-                });
-                $(".delgoods").click(function() {
-                    tmp = $("#qty").val();
-                    if (tmp <= 1) {
-                        return false;
-                    }
-                    $("#qty").val(parseInt(tmp) - 1);
-                });
                 $(".colorb").click(function() {
                     $(this).toggleClass("colorA");
                     $(this).parent().find("span").not(this).removeClass("colorA");
                 });
 
             })
+         
 		</script>
 		<style>
 			.attrValue {
@@ -126,14 +83,14 @@
 			<div id="proinfo">
 				<div class="img">
 					<div class="main_img">
-						<foreach name="Img" key="keys" item="vo">
+						<foreach name="Img" key="key" item="vo">
 							<eq name="vo.UseType" value="1">
-								<a target="_top" class="jqzoom" href="{$vo.Img}"> <img src="{$vo.Img}" id="minImage" alt="{$Name}" width="400" /></a>
+								<a target="_top" class="jqzoom" href="{$Img}"> <img src="{$vo.Img}" id="minImage" alt="{$Name}" width="400" /></a>
 							</eq>
 						</foreach>
 					</div>
 					<div class="min_img">
-						<foreach name="Img" key="keys" item="vo">
+						<foreach name="Img" key="key" item="vo">
 							<neq name="vo.UseType" value="1">
 								<a target="_top" class="jqzoom" href="#"> <img src="{$vo.Img}" id="minImage" alt="{$Name}" width="90" /></a>
 							</neq>
@@ -142,14 +99,13 @@
 				</div>
 				<div class="info">
 					<div class="pro_con">
-						<h2 id="sys_pn"><a target="_top" href="" title="{$Name}">{$Name}</a></h2>
+						<h2 id="sys_pn">{$Name}</h2>
 						<div style=" width:160px;">
-							<empty name="$score">
+							<empty name="score">
 								Review: <img style=" margin-top:1px;" src="__MYSTYLE__Images/1star.jpg" alt="{$Name}">
 								<else />
 								Review: <img style=" margin-top:1px;" src="__MYSTYLE__Images/{$score}star.jpg" alt="{$Name}">
 							</empty>
-
 						</div>
 						<div style="padding:6px 0">
 							Availability:
@@ -176,7 +132,7 @@
 							<!--属性循环-->
 							<div class="price">
 								<span>Price:</span>
-								<b class="sys_cur big_font">$</b><b class="sys_p big_font curprice">{$Price}</b>
+								<b class="sys_cur big_font">$</b><b class="sys_p big_font curprice" id="price">{$Price}</b>
 								<div class="clear"></div>
 							</div>
 
@@ -184,8 +140,8 @@
 								<font>Qty : </font>
 								<input id="qty" name="buyNum" value="1" size="5">
 								<div style="padding-bottom: 2px">
-									<a href="javascript:void(0);" class="addgoods"  style="display: block;"> <img src="__MYSTYLE__Images/good_detail_up.gif" style="cursor: pointer;" /></a>
-									<a href="javascript:void(0);"  class="delgoods" style="display: block;"> <img src="__MYSTYLE__Images/good_detail_down.gif" style="cursor: pointer;" /></a>
+									<a href="javascript:void(0);" class="addgoods1" onclick="addgoods('qty')"  style="display: block;"> <img src="__MYSTYLE__Images/good_detail_up.gif" style="cursor: pointer;" /></a>
+									<a href="javascript:void(0);"  class="delgoods" onclick="delgoods('qty')" style="display: block;"> <img src="__MYSTYLE__Images/good_detail_down.gif" style="cursor: pointer;" /></a>
 								</div>
 							</div>
 							<!--社会化插件开始-->
@@ -198,7 +154,8 @@
 
 							<!--社会化插件结束-->
 							<div class="clear"></div>
-							<input value="" class="add" aid="{$id}" src="__MYSTYLE__Images/add.jpg" type="image">
+							<input type="hidden" id="id" value="{$Id}" />
+							<input value="" class="addCart" onclick="addCart(this)" aid="{$Id}" src="__MYSTYLE__Images/add.jpg" type="image">
 							<div id="add"></div>
 						</form>
 						<div class="clear"></div>
@@ -265,7 +222,6 @@
 
 				</ol>
 			</div>
-
 			<div class="clear"></div>
 
 		</div>
@@ -286,7 +242,6 @@
 					<div class="may_price">
 						<span class="sys_cur">$</span><span class="sys_p">14.99</span>
 					</div>
-
 				</div>
 
 				<div class="list">
@@ -373,7 +328,5 @@
 	</div>
 </div>
 </div>
-
 <div class="clear"></div>
-
 <include file="Public:footer" />

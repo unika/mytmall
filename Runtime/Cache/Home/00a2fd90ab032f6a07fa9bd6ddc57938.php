@@ -8,6 +8,7 @@
 		<meta name="keywords" content="<?php echo ($keywords); ?>">
 		<script src="__PUBLIC__/Js/jquery.js" type="text/javascript"></script>
 		<script src="__PUBLIC__/Js/city.js" type="text/javascript"></script>
+		<script src="__PUBLIC__/Js/common.js" type="text/javascript"></script>
 		<script src="__PUBLIC__/Js/artDialog/jquery.artDialog.min.js" type="text/javascript"></script>
 		<script src="__PUBLIC__/Js/artDialog/artDialog.plugins.min.js" type="text/javascript"></script>
 		<script src="__PUBLIC__/Js/jquery-ui.js" type="text/javascript"></script>
@@ -25,9 +26,9 @@
 					<h1><a target="_top" title="" href="/"> <img title="Cheap Oakley Sunglasses,Wholesale Oakley Sunglasses,Discount Oakley Sunglasses" alt="Cheap Oakley Sunglasses,Wholesale Oakley Sunglasses,Discount Oakley Sunglasses" src="__MYSTYLE__Images/logo.jpg" align="left"></a></h1>
 					<div class="cur_search">
 						<div class="cart">
-							<?php if(empty($_SESSION['cart']['total_num'])): ?><a target="_top" href="__ROOT__/Cart" rel="nofollow" class="sys_cart">My Bag:( <span id="item">0</span> items)</a>
+							<?php if(empty($_SESSION['cart']['total_number'])): ?><a target="_top" href="__ROOT__/Cart" rel="nofollow" class="sys_cart">My Bag:( <span id="item">0</span> items)</a>
 								<?php else: ?>
-								<a target="_top" href="__ROOT__/Cart" rel="nofollow" class="sys_cart">My Bag:( <span id="item"><?php echo ($_SESSION['cart']['total_num']); ?></span> items)</a><?php endif; ?>
+								<a target="_top" href="__ROOT__/Cart" rel="nofollow" class="sys_cart">My Bag:( <span id="item"><?php echo ($_SESSION['cart']['total_number']); ?></span> items)</a><?php endif; ?>
 
 							<a target="_top" href="#" rel="nofollow" class="check">Checkout</a><div id="showcart"></div>
 						</div>
@@ -59,26 +60,23 @@
 							EUR</label> -->
 						</div>
 						<script>
-							$(document).ready(function() {
-								$('#Gstr').autocomplete({
-									minLength : 0,
-									max : 10,
-									width : 10,
-									autoFill : true,
-									source : "/Public/productList",
-								});
+                            $(document).ready(function() {
+                                $('#Gstr').autocomplete({
+                                    minLength : 0,
+                                    max : 10,
+                                    width : 10,
+                                    autoFill : true,
+                                    source : "/Public/productList",
 
-								$("#loading").ajaxStart(function() {
-									$(this).show();
-								})
-							})
+                                });
+
+                            })
 
 						</script>
-
 						<!--顶部搜索Widget开始-->
 						<form method="post" name="mini-search" target="_blank" action="/Public/serach">
-							<input id="go" value=" " alt="Search" src="__MYSTYLE__Images/go.jpg" type="image">
-							<input value="Oakley  Sunglasses" onblur="" onfocus="" name="key" id="Gstr" type="text">
+							<input id="go" value=""  alt="Search" src="__MYSTYLE__Images/go.jpg" type="image">
+							<input value="" name="key" id="Gstr" type="text">
 						</form>
 						<!--顶部搜索Widget开始-->
 					</div>
@@ -96,106 +94,104 @@
 			</div>
 
 <script>
-	$(document).ready(function() {
-		$(".delgoods").click(function() {
-			var obj = $(this);
-			var num = $(this).parents("tr").find(".num").val();
-			if (num > 1) {
-				num--;
-				$(this).parents("tr").find(".num").val(num);
-				$.post("__URL__/delGoods", {
-					'id' : $(this).attr("aid"),
-					'num' : num,
-				}, function(data) {
-					$("#item").text(data.data.message.total_num);
-					$("#Total_num").empty().text(data.data.message.total_num);
-					$("#Total_price").empty().text(data.data.message.total_price);
-					$("#sys_Subtotal").empty().text(data.data.message.total_price);
-					$("#sys_GrandTotal").empty().text(data.data.message.total_price);
+    $(document).ready(function() {
+        $(".delgoods").click(function() {
+            var obj = $(this);
+            var num = parseInt($(this).parents("tr").find(".num").val());
+            if (num > 1) {
+                num--;
+                $(this).parents("tr").find(".num").val(num);
+                $.post("__URL__/delgood", {
+                    'key' : $(this).attr("aid"),
+                    'number' : num,
+                }, function(data) {
+                    if (data.status == 1) {
+                        $("#item").text(data.data.total_number);
+                        $("#Total_num").text(data.data.total_number);
+                        $("#Total_price").text(data.data.total_price);
+                        $("#sys_Subtotal").text(data.data.total_price);
+                        $("#sys_GrandTotal").text(parseFloat($("#Total_price").text() - $("#sys_Coupon").text()).toFixed(2));
+                    } else {
+                        $.alert(data.info);
+                    }
+                }, 'json');
+            } else {
+                $.confirm("确定要删除吗", function() {
+                    $.post("__URL__/remove", {
+                        'key' : obj.attr("aid"),
+                    }, function(data) {
+                        if (data.status == 1) {
+                            obj.parents("tr").remove();
+                            $("#item").text(data.data.total_number);
+                            $("#Total_num").text(data.data.total_number);
+                            $("#Total_price").text(data.data.total_price);
+                            $("#sys_Subtotal").text(data.data.total_price);
+                            $("#sys_GrandTotal").text(parseFloat($("#Total_price").text() - $("#sys_Coupon").text()).toFixed(2));
+                        } else {
+                            $.alert(data.info);
+                        }
+                    }, 'json');
 
-				}, 'json');
-			} else {
-				$.confirm("确定要删除吗", function() {
-					$.get("__URL__/delCart", {
-						'id' : obj.attr("aid"),
-					}, function(data) {
-						if (data.status == 1) {
-							obj.parents("tr").remove();
-							$("#item").text(data.data.message.total_num);
-							$("#Total_num").empty().text(data.data.message.total_num);
-							$("#Total_price").empty().text(data.data.message.total_price);
-							$("#sys_Subtotal").empty().text(data.data.message.total_price);
-							$("#sys_GrandTotal").empty().text(data.data.message.total_price);
-						} else {
-							$.alert(data.info);
-						}
+                }, function() {
+                    this.close()
+                })
+            }
+        })
+        $(".remove").click(function() {
+            $.post("__URL__/remove", {
+                'key' : $(this).attr("aid"),
+            }, function(data) {
+                if (data.status == 1) {
+                    $("#item").text(data.data.total_num);
+                    $("#Total_num").text(data.data.total_num);
+                    $("#Total_price").text(data.data.total_price);
+                    $("#sys_Subtotal").text(data.data.total_price);
+                    $("#sys_GrandTotal").text(data.data.total_price);
+                } else {
+                    $.alert(data.info);
+                }
 
-					}, 'json');
+            }, 'json');
+            $(this).parents("tr").remove();
+        })
+        $(".addgoods").click(function() {
+            var num = $(this).parents("tr").find(".num").val();
+            num = parseInt(num) + 1;
+            $(this).parents("tr").find(".num").val(num);
+            $.post("__URL__/addgood", {
+                'key' : $(this).attr("aid"),
+                'number' : num,
+            }, function(data) {
+                if (data.status == 1) {
+                    $("#item").text(data.data.total_number);
+                    $("#sys_Coupon").text(data.data.coupon_price);
+                    $("#Total_num").text(data.data.total_number);
+                    $("#Total_price").text(data.data.total_price);
+                    $("#sys_Subtotal").text(data.data.total_price);
+                    $("#sys_GrandTotal").text(parseFloat($("#Total_price").text() - $("#sys_Coupon").text()).toFixed(2));
+                }
+            }, 'json');
+        })
 
-				}, function() {
-					this.close()
-				})
-			}
-		})
-		$(".remove").click(function() {
-			$.get("__URL__/delCart", {
-				'id' : $(this).attr("aid"),
-			}, function(data) {
-				if (data.status == 1) {
-					$("#item").text(data.data.message.total_num);
-					$("#Total_num").empty().text(data.data.message.total_num);
-					$("#Total_price").empty().text(data.data.message.total_price);
-					$("#sys_Subtotal").empty().text(data.data.message.total_price);
-					$("#sys_GrandTotal").empty().text(data.data.message.total_price);
-				} else {
-					$.alert(data.info);
-				}
-
-			}, 'json');
-			$(this).parents("tr").remove();
-		})
-		$(".addgoods").click(function() {
-			var num = $(this).parents("tr").find(".num").val();
-			num++;
-			$(this).parents("tr").find(".num").val(num);
-			$.post("__URL__/addGoods", {
-				'id' : $(this).attr("aid"),
-				'num' : num,
-			}, function(data) {
-				$("#item").text(data.data.message.total_num);
-				$("#Total_num").empty().text(data.data.message.total_num);
-				$("#Total_price").empty().text(data.data.message.total_price);
-				$("#sys_Subtotal").empty().text(data.data.message.total_price);
-				$("#sys_GrandTotal").text(parseFloat($("#Total_price").text(), 10) - parseFloat($("#sys_Coupon").text(), 10));
-			}, 'json');
-
-		})
-		//优惠券的有效性验证及使用
-		$("#btnValidate").click(function() {
-			$.post("__URL__/validCoupon", {
-				"No" : $("#Text1").val()
-			}, function(data) {
-				if (data.status == 1) {
-					$("#btnValidate").attr("disabled", "disabled");
-					$("#btnValidate").after("<span>本次" + data.info + "一次只能使用一张</span>");
-					$("#sys_Coupon").text(data.data.Price);
-					//为总价-优惠券的价格=最总价格
-					$("#sys_GrandTotal").text(parseFloat($("#Total_price").text()).toFixed(2) - parseFloat($("#sys_Coupon").text()).toFixed(2));
-					$.alert(data.info);
-				} else {
-					$("#sys_GrandTotal").text($("#Total_price").text());
-					$.alert(data.info);
-				}
-			}, 'json');
-		});
-
-	})
-	function gopay() {
-		$("#cart_info").submit();
-	}
+        $("#empty").click(function() {
+            $.post("__URL__/clearCart", {}, function(data) {
+                if (data.status == 1) {
+                    $("#item").text(0);
+                    $("#Total_num").text(0);
+                    $("#Total_price").text(parseFloat(0).toFixed(2));
+                    $("#sys_Subtotal").text(parseFloat(0).toFixed(2));
+                    $("#sys_GrandTotal").text(parseFloat(0).toFixed(2));
+                } else {
+                    $.alert(data.info);
+                }
+            }, "json")
+        })
+    })
+    function gopay() {
+        $("#cart_info").submit();
+    }
 
 </script>
-
 <div id="main">
 	<div id="main2">
 		<div id="shop_l">
@@ -223,39 +219,41 @@
 							</tr>
 						</thead>
 						<tbody>
-							<!--循环读取购物车内的商品开始-->
-							<?php if(is_array($goods)): $i = 0; $__LIST__ = $goods;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+							<!--循环读取购物车内的商品开始-->						
+							<?php if(is_array($goods)): foreach($goods as $key=>$vo): ?><tr>
 									<!--购物车图片-->
-									<td><a target="_top" href="#"> <img src="<?php echo ($vo["item_image"]); ?>" width="64"></a></td>
-									<td>										
-										<a target="_top" href="#"><?php echo ($vo["item_name"]); ?></a>
-										<br>
-										<br>
-										<div style=" padding-top:6px; float:left;">
-											<a style=" text-decoration:underline;" href="" target="_top">Edit</a>&nbsp; <a target="_top"  class="remove" aid="<?php echo ($vo["item_id"]); ?>" style="text-decoration:underline;" href="javascript:void(0);">Remove</a>
-										</div>
-									</td>
+									<td><a target="_top" href="/Product/show/Id/<?php echo ($vo["Id"]); ?>"> <img src="<?php echo ($vo["image"]); ?>" width="64"></a></td>
+									<td><a target="_top" href="/Product/show/Id/<?php echo ($vo["Id"]); ?>"><?php echo ($vo["product_name"]); ?></a>
+									<br>
+									<br>
+									<div style=" padding-top:6px; float:left;">
+										<a style=" text-decoration:underline;" href="#" target="_top">Edit</a>&nbsp; <a target="_top"  class="remove" aid="<?php echo ($key); ?>" style="text-decoration:underline;" href="javascript:void(0);">Remove</a>
+									</div></td>
 									<td>
-									<?php if(is_array($vo["item_attrValue"])): foreach($vo["item_attrValue"] as $$key=>$subvo): echo ($subvo); ?><br/><?php endforeach; endif; ?>
+										<?php if(is_array($vo["attrvalue"])): foreach($vo["attrvalue"] as $keys=>$subvo): ?><p>
+											<?php echo ($subvo); ?>
+											</p><?php endforeach; endif; ?>
+									
+									
 									</td>
-									<td style="padding: 0;text-align: center;width: 100px;"> <?php echo ($vo["item_price"]); ?> </td>
+									<td style="padding: 0;text-align: center;width: 100px;"> <?php echo ($vo["price"]); ?> </td>
 									<td style="padding: 0;text-align: center;width: 100px;">
 									<table style="display:inline;">
 										<tbody>
 											<tr id="num">
 												<td>
-												<input class="num" value="<?php echo ($vo["item_num"]); ?>" size="5" style="text-align: center" onkeyup="" class="line" id="sys_1_Num">
+												<input class="num" value="<?php echo ($vo["number"]); ?>" size="5" style="text-align: center" onkeyup="" class="line" id="sys_1_Num">
 												</td>
 												<td>
 												<div style="padding-bottom: 2px">
-													<a href="javascript:void(0);" class="addgoods" aid="<?php echo ($vo["item_id"]); ?>" style="display: block;"> <img  src="__MYSTYLE__Images/good_detail_up.gif" style="cursor: pointer;" /></a>
-													<a href="javascript:void(0);"  class="delgoods" aid="<?php echo ($vo["item_id"]); ?>" style="display: block;"> <img  src="__MYSTYLE__Images/good_detail_down.gif" style="cursor: pointer;" /></a>
+													<a href="javascript:void(0);" class="addgoods" aid="<?php echo ($key); ?>" style="display: block;"> <img  src="__MYSTYLE__Images/good_detail_up.gif" style="cursor: pointer;" /></a>
+													<a href="javascript:void(0);"  class="delgoods" aid="<?php echo ($key); ?>" style="display: block;"> <img  src="__MYSTYLE__Images/good_detail_down.gif" style="cursor: pointer;" /></a>
 												</div></td>
 											</tr>
 										</tbody>
 									</table></td>
-									<td id="sys_1_Subtotal" style="padding: 0;text-align: center;width: 100px;"> <?php echo ($vo["item_price"]); ?> </td>
-								</tr><?php endforeach; endif; else: echo "" ;endif; ?>
+									<td id="sys_1_Subtotal" style="padding: 0;text-align: center;width: 100px;"> <?php echo ($vo["price"]); ?> </td>
+								</tr><?php endforeach; endif; ?>
 							<!--循环读取购物车内的商品结束-->
 						</tbody>
 					</table>
@@ -264,37 +262,39 @@
 			<div class="cart_col5">
 				<div class="cart_discount">
 					<b>Discount Codes</b>
-					<input id="Text1" class="input-text" name="Coupon" onblur="if (this.value == '') this.value = 'Enter your coupon code :';" onfocus="if (this.value == 'Enter your coupon code :') this.value = '';" value="Enter your coupon code :" type="text">
-					<button id="btnValidate" type="button" onclick="" class="cart_btn"><img src="__MYSTYLE__Images/apply.jpg" alt="">
+					<input id="Text1" class="input-text" name="Coupon" value="Enter your coupon code :" type="text">
+					<button id="btnValidate" type="button" onclick="validCoupon('Text1')" class="cart_btn"><img src="__MYSTYLE__Images/apply.jpg" alt="">
 					</button>
 					<div class="clear"></div>
 					<span class="valid" mode="border"></span>
 				</div>
 				<dl class="cart_total">
-					<dd>
-						<b>Subtotal</b><b>$<span id="sys_Subtotal">
-							<?php if(empty($total_price)): ?>0.00
-								<?php else: ?>
-								<?php echo ($total_price); endif; ?> </span></b>
-					</dd>
+
 					<!--优惠券-->
 					<dd>
 						<b>Coupon</b><b>$<span id="sys_Coupon">
-							<?php if(empty($total_Coupon)): ?>0.00
+							<?php if(empty($coupon_price)): ?>0.00
 								<?php else: ?>
-								<?php echo ($total_Coupon); endif; ?></span></b>
+								<?php echo ($coupon_price); endif; ?> </span></b>
 					</dd>
 					<!--优惠券-->
 
 					<dd>
 						<b>Total_num</b><b><span id="Total_num">
-							<?php if(empty($total_num)): ?>0.00
+							<?php if(empty($total_number)): ?>0
 								<?php else: ?>
-								<?php echo ($total_num); endif; ?> </span></b>
+								<?php echo ($total_number); endif; ?> </span></b>
 					</dd>
-					<!--应该减优惠券-->
+
 					<dd>
 						<b>Total_price</b><b>$<span id="Total_price" >
+							<?php if(empty($total_price)): ?>0.00
+								<?php else: ?>
+								<?php echo ($total_price); endif; ?> </span></b>
+					</dd>
+
+					<dd>
+						<b>Subtotal</b><b>$<span id="sys_Subtotal">
 							<?php if(empty($total_price)): ?>0.00
 								<?php else: ?>
 								<?php echo ($total_price); endif; ?> </span></b>
@@ -302,10 +302,11 @@
 					<!--应该减优惠券-->
 					<dd class="cart_strong">
 						<b>Grand Total:</b><b class="red2">$<span id="sys_GrandTotal">
-							<?php if(empty($total_price)): ?>0.00
+							<?php if(empty($Grand_Total)): echo ($total_price); ?>
 								<?php else: ?>
-								<?php echo ($total_price); endif; ?> </span></b>
+								<?php echo ($Grand_Total); endif; ?> </span></b>
 					</dd>
+					<!--应该减优惠券-->
 					<dt><img alt="continue" onclick='document.location.href="/"' class="cart_btn" src="__MYSTYLE__Images/continue.jpg"><img class="cart_checkout" alt="Proceed to Checkout" onclick="gopay();" src="__MYSTYLE__Images/securecheck.jpg">
 					</dt>
 				</dl>
@@ -313,6 +314,9 @@
 			<div class="clear"></div>
 			<!---购物车Widget结束-->
 			</form>
+			<button id="empty">
+				清空购物车
+			</button>
 		</div>
 
 		<div id="shop_r">

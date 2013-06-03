@@ -1,0 +1,141 @@
+[ 2013-05-31T09:20:58+08:00 ] 127.0.0.1 /index.php/Admin/Index
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001227s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001304s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000916s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000971s ]
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001562s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001631s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.029912s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.029975s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000768s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000784s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000679s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.000859s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003232s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001153s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001210s ]
+
+[ 2013-05-31T09:20:58+08:00 ] 127.0.0.1 /index.php/Admin/Public/top
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.000926s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001047s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000561s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000637s ]
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001241s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001313s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.007575s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007642s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000348s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000350s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000246s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.000425s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001507s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.000559s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000612s ]
+
+[ 2013-05-31T09:20:58+08:00 ] 127.0.0.1 /index.php/Admin/Public/left
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001443s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001526s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000989s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001050s ]
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.000793s ]
+INFO: [ view_template ] --END-- [ RunTime:0.000857s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.016565s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016637s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000817s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000807s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000874s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.000879s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003551s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001721s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001787s ]
+
+[ 2013-05-31T09:20:58+08:00 ] 127.0.0.1 /index.php/Admin/Public/main
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001309s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001393s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000962s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001023s ]
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001542s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001612s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.107069s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.107150s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000927s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000862s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000672s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.000870s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003481s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001066s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001115s ]
+
+[ 2013-05-31T09:20:59+08:00 ] ERR: (ThinkException) 无法加载模块:favicon
+[ 2013-05-31T09:20:59+08:00 ] ERR: (ThinkException) 无法加载模块:favicon
+[ 2013-05-31T09:20:59+08:00 ] ERR: (ThinkException) 无法加载模块:favicon
+[ 2013-05-31T09:21:02+08:00 ] 127.0.0.1 /index.php/Admin/System/index
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.000797s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000885s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000513s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000570s ]
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001072s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001133s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.035608s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.035690s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000505s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000473s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000339s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.000571s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002076s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.000756s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000844s ]
+
+[ 2013-05-31T09:21:58+08:00 ] 127.0.0.1 /index.php/Admin/Public/top
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.000754s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000831s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000484s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000539s ]
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001208s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001278s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.007036s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007107s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000339s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000351s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000248s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.000427s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001504s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.000737s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000799s ]
+

@@ -83,7 +83,7 @@
 <body>
 	<h1><a href="javascript:void(0)" id="add">上传模板</a></h1>
 	<h2 class="tip">当前模板</h2>
-	<?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if(($vo["tp_name"]) == $theme): ?><div class="current">
+	<?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if(($vo["tp_name"]) == $theme): ?><div class="currenttp">
 				<img style="width:160px;height:160px;" src="/Tpl/Home/<?php echo ($vo["tp_name"]); ?>/<?php echo ($vo["image"]); ?>"/>
 				<p>
 					<span class="tip">模板名</span> <?php echo ($vo["tp_name"]); ?>
